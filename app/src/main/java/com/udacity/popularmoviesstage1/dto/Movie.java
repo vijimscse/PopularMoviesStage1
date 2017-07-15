@@ -9,27 +9,26 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Movie implements Parcelable
-{
+public class Movie implements Parcelable {
 
     @SerializedName("vote_count")
     @Expose
-    private Integer voteCount;
+    private int voteCount;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("video")
     @Expose
-    private Boolean video;
+    private boolean video;
     @SerializedName("vote_average")
     @Expose
-    private Double voteAverage;
+    private double voteAverage;
     @SerializedName("title")
     @Expose
     private String title;
     @SerializedName("popularity")
     @Expose
-    private Double popularity;
+    private double popularity;
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -47,7 +46,7 @@ public class Movie implements Parcelable
     private String backdropPath;
     @SerializedName("adult")
     @Expose
-    private Boolean adult;
+    private boolean adult;
     @SerializedName("overview")
     @Expose
     private String overview;
@@ -62,20 +61,20 @@ public class Movie implements Parcelable
         })
         public Movie createFromParcel(Parcel in) {
             Movie instance = new Movie();
-            instance.voteCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.video = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-            instance.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.title = ((String) in.readValue((String.class.getClassLoader())));
-            instance.popularity = ((Double) in.readValue((Double.class.getClassLoader())));
-            instance.posterPath = ((String) in.readValue((String.class.getClassLoader())));
-            instance.originalLanguage = ((String) in.readValue((String.class.getClassLoader())));
-            instance.originalTitle = ((String) in.readValue((String.class.getClassLoader())));
+            instance.voteCount = in.readInt();
+            instance.id = in.readInt();
+            instance.video = in.readInt() == 1;
+            instance.voteAverage = in.readDouble();
+            instance.title = in.readString();
+            instance.popularity = in.readDouble();
+            instance.posterPath = in.readString();
+            instance.originalLanguage = in.readString();
+            instance.originalTitle = in.readString(); in.readString();
             in.readList(instance.genreIds, (Integer.class.getClassLoader()));
-            instance.backdropPath = ((String) in.readValue((String.class.getClassLoader())));
-            instance.adult = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-            instance.overview = ((String) in.readValue((String.class.getClassLoader())));
-            instance.releaseDate = ((String) in.readValue((String.class.getClassLoader())));
+            instance.backdropPath = in.readString();
+            instance.adult = in.readInt() == 1;
+            instance.overview = in.readString();
+            instance.releaseDate = in.readString();
             return instance;
         }
 
@@ -86,35 +85,35 @@ public class Movie implements Parcelable
     }
     ;
 
-    public Integer getVoteCount() {
+    public int getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(Integer voteCount) {
+    public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Boolean getVideo() {
+    public boolean getVideo() {
         return video;
     }
 
-    public void setVideo(Boolean video) {
+    public void setVideo(boolean video) {
         this.video = video;
     }
 
-    public Double getVoteAverage() {
+    public double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Double voteAverage) {
+    public void setVoteAverage(double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -126,11 +125,11 @@ public class Movie implements Parcelable
         this.title = title;
     }
 
-    public Double getPopularity() {
+    public double getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(Double popularity) {
+    public void setPopularity(double popularity) {
         this.popularity = popularity;
     }
 
@@ -174,11 +173,11 @@ public class Movie implements Parcelable
         this.backdropPath = backdropPath;
     }
 
-    public Boolean getAdult() {
+    public boolean getAdult() {
         return adult;
     }
 
-    public void setAdult(Boolean adult) {
+    public void setAdult(boolean adult) {
         this.adult = adult;
     }
 
@@ -199,20 +198,20 @@ public class Movie implements Parcelable
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(voteCount);
-        dest.writeValue(id);
-        dest.writeValue(video);
-        dest.writeValue(voteAverage);
-        dest.writeValue(title);
-        dest.writeValue(popularity);
-        dest.writeValue(posterPath);
-        dest.writeValue(originalLanguage);
-        dest.writeValue(originalTitle);
+        dest.writeInt(voteCount);
+        dest.writeInt(id);
+        dest.writeInt(video ? 1 : 0);
+        dest.writeDouble(voteAverage);
+        dest.writeString(title);
+        dest.writeDouble(popularity);
+        dest.writeString(posterPath);
+        dest.writeString(originalLanguage);
+        dest.writeString(originalTitle);
         dest.writeList(genreIds);
-        dest.writeValue(backdropPath);
-        dest.writeValue(adult);
-        dest.writeValue(overview);
-        dest.writeValue(releaseDate);
+        dest.writeString(backdropPath);
+        dest.writeInt(adult ? 1 : 0);
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
     }
 
     public int describeContents() {

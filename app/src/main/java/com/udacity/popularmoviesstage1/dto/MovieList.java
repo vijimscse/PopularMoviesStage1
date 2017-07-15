@@ -1,28 +1,29 @@
 
 package com.udacity.popularmoviesstage1.dto;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MovieList implements Parcelable
-{
+import java.util.List;
+
+public class MovieList implements Parcelable {
 
     @SerializedName("page")
     @Expose
-    private Integer page;
+    private int page;
     @SerializedName("total_results")
     @Expose
-    private Integer totalResults;
+    private int totalResults;
     @SerializedName("total_pages")
     @Expose
-    private Integer totalPages;
+    private int totalPages;
     @SerializedName("results")
     @Expose
-    private List<Movie> movies = null;
+    private List<Movie> movieList = null;
+
     public final static Creator<MovieList> CREATOR = new Creator<MovieList>() {
 
 
@@ -31,10 +32,10 @@ public class MovieList implements Parcelable
         })
         public MovieList createFromParcel(Parcel in) {
             MovieList instance = new MovieList();
-            instance.page = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.totalResults = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.totalPages = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            in.readList(instance.movies, (Movie.class.getClassLoader()));
+            instance.page = in.readInt();
+            instance.totalResults = in.readInt();
+            instance.totalPages = in.readInt();
+            in.readList(instance.movieList, (Movie.class.getClassLoader()));
             return instance;
         }
 
@@ -45,43 +46,39 @@ public class MovieList implements Parcelable
     }
     ;
 
-    public Integer getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(Integer page) {
+    public void setPage(int page) {
         this.page = page;
     }
 
-    public Integer getTotalResults() {
+    public int getTotalResults() {
         return totalResults;
     }
 
-    public void setTotalResults(Integer totalResults) {
+    public void setTotalResults(int totalResults) {
         this.totalResults = totalResults;
     }
 
-    public Integer getTotalPages() {
+    public int getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Integer totalPages) {
+    public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
 
     public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+        return movieList;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(page);
-        dest.writeValue(totalResults);
-        dest.writeValue(totalPages);
-        dest.writeList(movies);
+        dest.writeInt(page);
+        dest.writeInt(totalResults);
+        dest.writeInt(totalPages);
+        dest.writeList(movieList);
     }
 
     public int describeContents() {

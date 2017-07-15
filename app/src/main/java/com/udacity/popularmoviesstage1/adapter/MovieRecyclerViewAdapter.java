@@ -80,7 +80,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
             mUserRating = (TextView) itemView.findViewById(R.id.userRating);
             mReleaseDate = (TextView) itemView.findViewById(R.id.releaseDate);
 
-            itemView.setOnClickListener(v -> {mMovieItemClickListener.onItemClick(getAdapterPosition());});
+            itemView.setOnClickListener(v -> mMovieItemClickListener.onItemClick(getAdapterPosition()));
         }
     }
 }
