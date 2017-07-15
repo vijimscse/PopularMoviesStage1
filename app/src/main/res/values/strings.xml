@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">PopularMoviesStage1</string>
+    <string name="app_name">Pop Movies</string>
     <string name="no_internet_connection">Please check your internet connection!!</string>
+    <string name="generic_error">Sorry! Something has gone wrong!!!</string>
+    <string name="sort_by">Sort by</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top rated</string>
+    <string name="movie_detail">Movie Detail</string>
 </resources>

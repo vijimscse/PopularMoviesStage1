@@ -1,5 +1,7 @@
 package com.udacity.popularmoviesstage1.io;
 
+import com.udacity.popularmoviesstage1.dto.MovieList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -11,6 +13,9 @@ import retrofit2.http.Query;
 public interface APIService {
 
     @GET("popular")
-    Call<String> requestPopularMovies(@Query("api_key") String apiKey);
+    Call<MovieList> requestPopularMovies(@Query("api_key") String apiKey);
+
+    @GET("top_rated")
+    Call<MovieList> requestTopRatedMovies(@Query("api_key") String apiKey);
 
 }

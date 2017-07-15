@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/poster_height">
+
+    <ImageView
+        android:id="@+id/poster_path"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/transparent_black">
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/releaseDate"
+            android:textStyle="bold"
+            android:textSize="@dimen/movie_title_text_size"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="5dp"
+            tools:text="MOM"
+            />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/userRating"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/movie_subtitle_text_size"
+            tools:text="12/07/2017"/>
+
+        <TextView
+            android:id="@+id/userRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/ic_rating"
+            android:textSize="@dimen/movie_subtitle_text_size"
+            android:drawablePadding="5dp"
+            tools:text="7.5"/>
+    </RelativeLayout>
+</FrameLayout>
