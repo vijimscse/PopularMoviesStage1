@@ -15,10 +15,13 @@ import com.udacity.popularmoviesstage1.dto.Movie;
 import com.udacity.popularmoviesstage1.utils.DateFormatter;
 import com.udacity.popularmoviesstage1.utils.IBundleKeys;
 
-import static com.udacity.popularmoviesstage1.io.IOManager.IMAGE_BASE_URL;
+import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
 
 /**
  * Created by VijayaLakshmi.IN on 7/14/2017.
+ *
+ * Showcases the selected movie details
+ *
  */
 public class MovieDetailFragment extends Fragment {
 

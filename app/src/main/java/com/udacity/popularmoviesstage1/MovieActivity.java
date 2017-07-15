@@ -19,6 +19,12 @@ import com.udacity.popularmoviesstage1.utils.SortType;
 
 import static com.udacity.popularmoviesstage1.utils.IBundleKeys.SELECTED_MOVIE;
 
+/**
+ * Created by Vijayalakshmi.IN on 14/07/2017
+ *
+ * Movie screen displays the list of movies and its details
+ *
+ */
 public class MovieActivity extends AppCompatActivity implements MovieListFragment.IMovieListFragmentListener, FragmentManager.OnBackStackChangedListener {
 
     private static final String TAG = MovieActivity.class.getSimpleName();

@@ -30,6 +30,8 @@ import retrofit2.Response;
 
 /**
  * Created by VijayaLakshmi.IN on 7/14/2017.
+ *
+ * Showcases the list of movies based on SortType
  */
 public class MovieListFragment extends Fragment implements MovieRecyclerViewAdapter.MovieItemClickListener {
 

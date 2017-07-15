@@ -15,7 +15,7 @@ import com.udacity.popularmoviesstage1.utils.DateFormatter;
 
 import java.util.List;
 
-import static com.udacity.popularmoviesstage1.io.IOManager.IMAGE_BASE_URL;
+import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
 
 /**
  * Created by VijayaLakshmi.IN on 7/14/2017.

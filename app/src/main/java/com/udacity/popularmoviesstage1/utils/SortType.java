@@ -5,7 +5,6 @@ package com.udacity.popularmoviesstage1.utils;
  */
 
 public enum SortType {
-
     POPULAR,
     TOP_RATED
 }

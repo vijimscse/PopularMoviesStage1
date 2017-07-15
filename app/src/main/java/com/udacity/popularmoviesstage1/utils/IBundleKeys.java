@@ -5,6 +5,5 @@ package com.udacity.popularmoviesstage1.utils;
  */
 
 public interface IBundleKeys {
-
-    public static final String SELECTED_MOVIE = "Selected Movie";
+    String SELECTED_MOVIE = "Selected Movie";
 }

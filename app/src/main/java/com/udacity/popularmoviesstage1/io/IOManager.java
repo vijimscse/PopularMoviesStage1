@@ -11,14 +11,13 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.udacity.popularmoviesstage1.utils.Config.BASE_URL;
+
 /**
- * Created by Accolite on 7/13/2017.
+ * Created by Vijayalakshmi.IN on 7/13/2017.
  */
 
 public class IOManager {
-
-    public static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
-    public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 
     private static Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -39,11 +38,11 @@ public class IOManager {
 
         switch (sortType) {
             case TOP_RATED:
-                call = apiService.requestTopRatedMovies(Config.API_KEY);
+                call = apiService.requestTopRatedMovies(Config.API_KEY_VALUE);
                 break;
 
             default:
-                call = apiService.requestPopularMovies(Config.API_KEY);
+                call = apiService.requestPopularMovies(Config.API_KEY_VALUE);
                 break;
         }
 
