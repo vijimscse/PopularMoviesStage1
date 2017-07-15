@@ -17,4 +17,4 @@ If you already have an api key and forgot what it is
 
 You can find the same under Account settings -> API section
 
-Please put the same value under Config.java API_KEY value to run the app error-free.
+Please put the same value under Config.java field => API_KEY_VALUE value to run the app error-free.
