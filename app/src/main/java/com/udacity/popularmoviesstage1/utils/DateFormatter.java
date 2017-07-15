@@ -16,7 +16,6 @@ public class DateFormatter {
         try {
             Date date = dt.parse(dateStr);
             SimpleDateFormat dt1 = new SimpleDateFormat("dd MMM yyyy");
-            System.out.println(dt1.format(date));
 
             return dt1.format(date);
         } catch (ParseException e) {
