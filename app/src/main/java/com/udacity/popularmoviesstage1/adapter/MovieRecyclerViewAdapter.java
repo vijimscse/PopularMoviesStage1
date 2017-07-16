@@ -15,6 +15,10 @@ import com.udacity.popularmoviesstage1.utils.DateFormatter;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
 
 /**
@@ -52,7 +56,11 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         movieViewHolder.mTitle.setText(movie.getTitle());
         movieViewHolder.mReleaseDate.setText(DateFormatter.getDateFormat(movie.getReleaseDate()));
         movieViewHolder.mUserRating.setText(String.valueOf(movie.getVoteAverage()));
-        Picasso.with(mContext).load(IMAGE_BASE_URL + movie.getPosterPath()).into(movieViewHolder.mPosterPath);
+        Picasso.with(mContext)
+                .load(IMAGE_BASE_URL + movie.getPosterPath())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.image_error)
+                .into(movieViewHolder.mPosterPath);
     }
 
     @Override
@@ -67,20 +75,27 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        final TextView mTitle;
-        final ImageView mPosterPath;
-        final TextView mUserRating;
-        final TextView mReleaseDate;
+
+        @BindView(R.id.movie_title)
+        TextView mTitle;
+
+        @BindView(R.id.poster_path)
+        ImageView mPosterPath;
+
+        @BindView(R.id.userRating)
+        TextView mUserRating;
+
+        @BindView(R.id.releaseDate)
+        TextView mReleaseDate;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
 
-            mTitle = (TextView) itemView.findViewById(R.id.movie_title);
-            mPosterPath = (ImageView) itemView.findViewById(R.id.poster_path);
-            mUserRating = (TextView) itemView.findViewById(R.id.userRating);
-            mReleaseDate = (TextView) itemView.findViewById(R.id.releaseDate);
-
-            itemView.setOnClickListener(v -> mMovieItemClickListener.onItemClick(getAdapterPosition()));
+        @OnClick(R.id.movie_row)
+        public void onMovieClick(View view) {
+            mMovieItemClickListener.onItemClick(getAdapterPosition());
         }
     }
 }

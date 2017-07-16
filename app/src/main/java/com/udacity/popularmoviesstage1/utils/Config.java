@@ -5,7 +5,6 @@ package com.udacity.popularmoviesstage1.utils;
  */
 
 public interface Config {
-    String API_KEY_VALUE = "";
 
     String API_KEY = "api_key";
     String POPULAR = "popular";

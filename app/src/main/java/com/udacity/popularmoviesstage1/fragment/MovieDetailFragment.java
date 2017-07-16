@@ -15,6 +15,9 @@ import com.udacity.popularmoviesstage1.dto.Movie;
 import com.udacity.popularmoviesstage1.utils.DateFormatter;
 import com.udacity.popularmoviesstage1.utils.IBundleKeys;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
 
 /**
@@ -24,25 +27,35 @@ import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
  *
  */
 public class MovieDetailFragment extends Fragment {
-    private TextView mTitle;
-    private TextView mSynopsis;
-    private TextView mUserRating;
-    private TextView mReleaseDate;
-    private ImageView mMoviePoster;
+    @BindView(R.id.movie_title)
+    TextView mTitle;
+
+    @BindView(R.id.synopsis)
+    TextView mSynopsis;
+
+    @BindView(R.id.userRating)
+    TextView mUserRating;
+
+    @BindView(R.id.releaseDate)
+    TextView mReleaseDate;
+
+    @BindView(R.id.movie_poster)
+    ImageView mMoviePoster;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.movie_details, container, false);
 
-        return inflater.inflate(R.layout.movie_details, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        initViews();
 
         if (getArguments() != null) {
             Bundle bundle = getArguments();
@@ -51,19 +64,12 @@ public class MovieDetailFragment extends Fragment {
                 mTitle.setText(selectedMovie.getOriginalTitle());
                 mSynopsis.setText(selectedMovie.getOverview());
                 mUserRating.setText(String.valueOf(selectedMovie.getVoteAverage()));
-                Picasso.with(getActivity()).load(IMAGE_BASE_URL + selectedMovie.getPosterPath()).into(mMoviePoster);
+                Picasso.with(getActivity()).load(IMAGE_BASE_URL + selectedMovie.getPosterPath())
+                        .placeholder(R.drawable.placeholder)
+                        .error(R.drawable.image_error)
+                        .into(mMoviePoster);
                 mReleaseDate.setText(DateFormatter.getDateFormat(selectedMovie.getReleaseDate()));
             }
-        }
-    }
-
-    private void initViews() {
-        if (getActivity() != null && getView() != null) {
-            mTitle = (TextView) getView().findViewById(R.id.movie_title);
-            mSynopsis = (TextView) getView().findViewById(R.id.synopsis);
-            mUserRating = (TextView) getView().findViewById(R.id.userRating);
-            mReleaseDate = (TextView) getView().findViewById(R.id.releaseDate);
-            mMoviePoster = (ImageView) getView().findViewById(R.id.movie_poster);
         }
     }
 }

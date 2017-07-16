@@ -21,9 +21,8 @@ import static com.udacity.popularmoviesstage1.utils.IBundleKeys.SELECTED_MOVIE;
 
 /**
  * Created by Vijayalakshmi.IN on 14/07/2017
- *
+ * <p>
  * Movie screen displays the list of movies and its details
- *
  */
 public class MovieActivity extends AppCompatActivity implements MovieListFragment.IMovieListFragmentListener, FragmentManager.OnBackStackChangedListener {
 
@@ -73,7 +72,7 @@ public class MovieActivity extends AppCompatActivity implements MovieListFragmen
         return true;
     }
 
-    private void showPopup(){
+    private void showPopup() {
         View menuItemView = findViewById(R.id.sort_by);
         PopupMenu popup = new PopupMenu(this, menuItemView);
         MenuInflater inflate = popup.getMenuInflater();

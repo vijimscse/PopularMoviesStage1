@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.udacity.popularmoviesstage1.utils.SortType;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,8 +38,13 @@ import retrofit2.Response;
  */
 public class MovieListFragment extends Fragment implements MovieRecyclerViewAdapter.MovieItemClickListener {
 
-    private RecyclerView mRecyclerView;
-    private ProgressBar mProgressBar;
+    private static final int MIN_GRID_SIZE = 2;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private MovieRecyclerViewAdapter mMovieRecyclerViewAdapter;
     private final List<Movie> mMovieList = new ArrayList<>();
@@ -59,8 +67,10 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.movie_list, container, false);
+        ButterKnife.bind(this, view);
 
-        return inflater.inflate(R.layout.movie_list, container, false);
+        return view;
     }
 
     @Override
@@ -68,9 +78,8 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
         super.onActivityCreated(savedInstanceState);
 
         if (getActivity() != null && getView() != null) {
-            mProgressBar = (ProgressBar) getView().findViewById(R.id.progress_bar);
-            mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns()));
 
             mMovieRecyclerViewAdapter = new MovieRecyclerViewAdapter(getActivity(), mMovieList, this);
             mRecyclerView.setAdapter(mMovieRecyclerViewAdapter);
@@ -85,7 +94,7 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
      * Request movie list based on the selected sort type.
      * @param sortType
      */
-    public void requestMovies(SortType sortType) {
+    public void requestMovies(int sortType) {
         if (NetworkUtility.isInternetConnected(getActivity())) {
             mProgressBar.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
@@ -94,6 +103,7 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
                 public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                     mProgressBar.setVisibility(View.GONE);
                     if (response != null && response.body() != null) {
+                        mMovieList.clear();
                         mRecyclerView.setVisibility(View.VISIBLE);
                         mMovieList.addAll(response.body().getMovies());
                         mMovieRecyclerViewAdapter.notifyDataSetChanged();
@@ -109,6 +119,22 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
         } else {
             DialogUtility.showToast(getActivity(), getString(R.string.no_internet_connection));
         }
+    }
+
+    private int numberOfColumns() {
+        int nColumns = 0;
+
+        if (getActivity() != null) {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int widthDivider = 400;
+            int width = displayMetrics.widthPixels;
+            nColumns = width / widthDivider;
+
+            if (nColumns < MIN_GRID_SIZE) return MIN_GRID_SIZE;
+        }
+
+        return nColumns;
     }
 
     @Override
