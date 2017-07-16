@@ -23,9 +23,9 @@ import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
 
-    private Context mContext;
-    private List<Movie> mMovieList;
-    private MovieItemClickListener mMovieItemClickListener;
+    private final Context mContext;
+    private final List<Movie> mMovieList;
+    private final MovieItemClickListener mMovieItemClickListener;
 
     public interface MovieItemClickListener {
         void onItemClick(int position);
@@ -67,10 +67,10 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView mTitle;
-        ImageView mPosterPath;
-        TextView mUserRating;
-        TextView mReleaseDate;
+        final TextView mTitle;
+        final ImageView mPosterPath;
+        final TextView mUserRating;
+        final TextView mReleaseDate;
 
         public MovieViewHolder(View itemView) {
             super(itemView);

@@ -39,7 +39,7 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
     private ProgressBar mProgressBar;
 
     private MovieRecyclerViewAdapter mMovieRecyclerViewAdapter;
-    private List<Movie> mMovieList = new ArrayList<>();
+    private final List<Movie> mMovieList = new ArrayList<>();
     private IMovieListFragmentListener mMovieListFragmentListener;
 
     public interface IMovieListFragmentListener {
@@ -59,24 +59,25 @@ public class MovieListFragment extends Fragment implements MovieRecyclerViewAdap
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.movie_list, null, false);
 
-        return view;
+        return inflater.inflate(R.layout.movie_list, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mProgressBar = (ProgressBar) getView().findViewById(R.id.progress_bar);
-        mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        if (getActivity() != null && getView() != null) {
+            mProgressBar = (ProgressBar) getView().findViewById(R.id.progress_bar);
+            mRecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        mMovieRecyclerViewAdapter = new MovieRecyclerViewAdapter(getActivity(), mMovieList, this);
-        mRecyclerView.setAdapter(mMovieRecyclerViewAdapter);
+            mMovieRecyclerViewAdapter = new MovieRecyclerViewAdapter(getActivity(), mMovieList, this);
+            mRecyclerView.setAdapter(mMovieRecyclerViewAdapter);
 
-        if (mMovieList == null || mMovieList.isEmpty()) {
-            requestMovies(SortType.POPULAR);
+            if (mMovieList == null || mMovieList.isEmpty()) {
+                requestMovies(SortType.POPULAR);
+            }
         }
     }
 

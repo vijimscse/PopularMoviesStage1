@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/movie_title"
@@ -26,6 +26,7 @@
             android:layout_width="@dimen/poster_width"
             android:layout_height="@dimen/poster_height"
             android:layout_margin="10dp"
+            android:contentDescription="@string/movie_poster"
             android:layout_below="@id/movie_title"/>
 
         <TextView
@@ -50,7 +51,9 @@
             android:drawablePadding="5dp"
             android:layout_marginTop="20dp"
             android:drawableLeft="@drawable/ic_rating"
+            android:drawableStart="@drawable/ic_rating"
             android:layout_toRightOf="@id/movie_poster"
+            android:layout_toEndOf="@id/movie_poster"
             />
 
         <TextView
@@ -62,6 +65,7 @@
             android:layout_below="@id/userRating"
             android:layout_margin="10dp"
             android:layout_toRightOf="@id/movie_poster"
+            android:layout_toEndOf="@id/movie_poster"
             />
 
     </RelativeLayout>

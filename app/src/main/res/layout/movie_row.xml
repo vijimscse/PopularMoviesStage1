@@ -9,6 +9,7 @@
         android:id="@+id/poster_path"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/movie_poster"
         android:scaleType="fitXY"/>
 
     <RelativeLayout
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/userRating"
+            android:layout_toStartOf="@+id/userRating"
             android:textColor="@android:color/white"
             android:textSize="@dimen/movie_subtitle_text_size"
             tools:text="12/07/2017"/>
@@ -46,8 +48,10 @@
             android:gravity="center_vertical"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:textColor="@android:color/white"
             android:drawableLeft="@drawable/ic_rating"
+            android:drawableStart="@drawable/ic_rating"
             android:textSize="@dimen/movie_subtitle_text_size"
             android:drawablePadding="5dp"
             tools:text="7.5"/>

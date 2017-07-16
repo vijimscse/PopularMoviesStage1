@@ -24,8 +24,6 @@ import static com.udacity.popularmoviesstage1.utils.Config.IMAGE_BASE_URL;
  *
  */
 public class MovieDetailFragment extends Fragment {
-
-    private Movie mSelectedMovie;
     private TextView mTitle;
     private TextView mSynopsis;
     private TextView mUserRating;
@@ -36,9 +34,8 @@ public class MovieDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.movie_details, null, false);
 
-        return view;
+        return inflater.inflate(R.layout.movie_details, container, false);
     }
 
     @Override
@@ -49,21 +46,24 @@ public class MovieDetailFragment extends Fragment {
 
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            if ((mSelectedMovie = bundle.getParcelable(IBundleKeys.SELECTED_MOVIE)) != null) {
-                mTitle.setText(mSelectedMovie.getOriginalTitle());
-                mSynopsis.setText(mSelectedMovie.getOverview());
-                mUserRating.setText(String.valueOf(mSelectedMovie.getVoteAverage()));
-                Picasso.with(getActivity()).load(IMAGE_BASE_URL + mSelectedMovie.getPosterPath()).into(mMoviePoster);
-                mReleaseDate.setText(DateFormatter.getDateFormat(mSelectedMovie.getReleaseDate()));
+            Movie selectedMovie;
+            if ((selectedMovie = bundle.getParcelable(IBundleKeys.SELECTED_MOVIE)) != null) {
+                mTitle.setText(selectedMovie.getOriginalTitle());
+                mSynopsis.setText(selectedMovie.getOverview());
+                mUserRating.setText(String.valueOf(selectedMovie.getVoteAverage()));
+                Picasso.with(getActivity()).load(IMAGE_BASE_URL + selectedMovie.getPosterPath()).into(mMoviePoster);
+                mReleaseDate.setText(DateFormatter.getDateFormat(selectedMovie.getReleaseDate()));
             }
         }
     }
 
     private void initViews() {
-        mTitle = (TextView) getView().findViewById(R.id.movie_title);
-        mSynopsis = (TextView) getView().findViewById(R.id.synopsis);
-        mUserRating = (TextView) getView().findViewById(R.id.userRating);
-        mReleaseDate = (TextView) getView().findViewById(R.id.releaseDate);
-        mMoviePoster = (ImageView) getView().findViewById(R.id.movie_poster);
+        if (getActivity() != null && getView() != null) {
+            mTitle = (TextView) getView().findViewById(R.id.movie_title);
+            mSynopsis = (TextView) getView().findViewById(R.id.synopsis);
+            mUserRating = (TextView) getView().findViewById(R.id.userRating);
+            mReleaseDate = (TextView) getView().findViewById(R.id.releaseDate);
+            mMoviePoster = (ImageView) getView().findViewById(R.id.movie_poster);
+        }
     }
 }

@@ -22,7 +22,7 @@ public class MovieList implements Parcelable {
     private int totalPages;
     @SerializedName("results")
     @Expose
-    private List<Movie> movieList = null;
+    private final List<Movie> movieList = null;
 
     public final static Creator<MovieList> CREATOR = new Creator<MovieList>() {
 

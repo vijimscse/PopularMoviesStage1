@@ -31,7 +31,6 @@ public class MovieActivity extends AppCompatActivity implements MovieListFragmen
 
     private MovieListFragment mMovieListFragment;
     private Menu mMenu;
-    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class MovieActivity extends AppCompatActivity implements MovieListFragmen
         return true;
     }
 
-    public void showPopup(){
+    private void showPopup(){
         View menuItemView = findViewById(R.id.sort_by);
         PopupMenu popup = new PopupMenu(this, menuItemView);
         MenuInflater inflate = popup.getMenuInflater();
@@ -123,18 +122,19 @@ public class MovieActivity extends AppCompatActivity implements MovieListFragmen
     public void onBackStackChanged() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
-        if (fragment != null && mMenu != null) {
-            mActionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
+
+        if (fragment != null && mMenu != null && actionBar != null) {
             if (fragment instanceof MovieListFragment) {
-                mActionBar.setTitle(R.string.app_name);
-                mActionBar.setDisplayHomeAsUpEnabled(false);
-                mActionBar.setDisplayShowHomeEnabled(false);
+                actionBar.setTitle(R.string.app_name);
+                actionBar.setDisplayHomeAsUpEnabled(false);
+                actionBar.setDisplayShowHomeEnabled(false);
                 mMenu.findItem(R.id.sort_by).setVisible(true);
             } else {
-                mActionBar.setTitle(R.string.movie_detail);
+                actionBar.setTitle(R.string.movie_detail);
                 mMenu.findItem(R.id.sort_by).setVisible(false);
-                mActionBar.setDisplayHomeAsUpEnabled(true);
-                mActionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(true);
             }
         }
     }
